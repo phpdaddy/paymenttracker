@@ -3,11 +3,11 @@ package com.phpdaddy.paymenttracker;
 import com.phpdaddy.paymenttracker.model.Currency;
 import com.phpdaddy.paymenttracker.model.Payment;
 import com.phpdaddy.paymenttracker.service.PaymentService;
-import javafx.util.Pair;
 
-import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class App {
     private final static PaymentService paymentService = new PaymentService();

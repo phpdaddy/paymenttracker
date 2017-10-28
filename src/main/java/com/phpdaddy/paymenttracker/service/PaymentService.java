@@ -3,7 +3,6 @@ package com.phpdaddy.paymenttracker.service;
 import com.phpdaddy.paymenttracker.Constants;
 import com.phpdaddy.paymenttracker.model.Currency;
 import com.phpdaddy.paymenttracker.model.Payment;
-import javafx.util.Pair;
 
 import java.util.Scanner;
 import java.util.regex.Matcher;
