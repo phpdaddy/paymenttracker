@@ -20,7 +20,7 @@ Run tests with IDEA tools
 * Type 'show' to show net amounts
 * If the input line has incorrect format the error message is displayed 
 * If currency does not exist then there will be an error
-
+* Only integer values are applicable for payments
 ## Authors
 
 * **Maksym Prysiazhnyi** - *Initial work*
