@@ -1,3 +1,5 @@
+package com.phpdaddy.paymenttracker.model;
+
 public class Payment {
     private Currency currency;
     private Integer value;
