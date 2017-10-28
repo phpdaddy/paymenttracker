@@ -16,8 +16,8 @@ public class App {
 
     public static void main(String[] args) {
         scheduleNetAmounts();
-
         while (true) {
+            System.out.println("Enter payment in format 'USD 123'");
             processInput();
         }
     }
@@ -27,8 +27,13 @@ public class App {
         try {
             payment = paymentService.readPayment();
             payments.add(payment);
-            balance.put(payment.getCurrency(), balance.get(payment.getCurrency()) + payment.getValue());
+            int currentBalance = 0;
+            if (balance.get(payment.getCurrency()) != null) {
+                currentBalance = balance.get(payment.getCurrency());
+            }
+            balance.put(payment.getCurrency(), currentBalance + payment.getValue());
         } catch (Exception ex) {
+            ex.printStackTrace();
             System.out.println("!!! " + ex.getLocalizedMessage());
         }
     }
@@ -38,14 +43,17 @@ public class App {
 
         timer.schedule(new TimerTask() {
             public void run() {
-                System.out.println("***********************");
-                System.out.println("****** NET AMOUNTS ****");
-                balance.forEach((currency, value) -> {
-                    System.out.println(currency + " " + value);
-                });
-                System.out.println("***********************");
+                showNetAmounts();
             }
-        }, 0, 60 * 100);
+        }, 60 * 1000, 60 * 1000);
     }
 
+    private static void showNetAmounts() {
+        System.out.println("<**********************");
+        System.out.println("****** NET AMOUNTS ****");
+        balance.forEach((currency, value) -> {
+            System.out.println(currency + " " + value);
+        });
+        System.out.println("**********************>");
+    }
 }
