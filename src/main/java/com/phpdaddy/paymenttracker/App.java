@@ -16,7 +16,7 @@ public class App {
     public static void main(String[] args) {
         scheduleNetAmounts();
         while (true) {
-            System.out.println("Enter payment in format 'USD 123' or 'quit' for exit");
+            System.out.println("Enter payment in format 'USD 123' or 'quit' for exit or 'show' to show net amounts");
             processInput();
         }
     }
@@ -28,6 +28,9 @@ public class App {
         try {
             if (line.equals("quit")) {
                 System.exit(0);
+            } else if (line.equals("show")) {
+                showNetAmounts();
+                return;
             }
             payment = paymentService.readPayment(line);
         } catch (RuntimeException ex) {
@@ -55,7 +58,7 @@ public class App {
         System.out.println("<**********************");
         System.out.println("****** NET AMOUNTS ****");
         balance.forEach((currency, value) -> {
-            System.out.println(currency + " " + value);
+            System.out.println(currency + " " + value + " (USD " + (currency.getRate() * value) + ")");
         });
         System.out.println("**********************>");
     }
