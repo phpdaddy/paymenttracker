@@ -4,14 +4,13 @@ import com.phpdaddy.paymenttracker.model.Currency;
 import com.phpdaddy.paymenttracker.model.Payment;
 import com.phpdaddy.paymenttracker.service.PaymentService;
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class App {
     private final static PaymentService paymentService = new PaymentService();
-    private final static ArrayList<Payment> payments = new ArrayList<>();
     private final static HashMap<Currency, Integer> balance = new HashMap<>();
 
     public static void main(String[] args) {
@@ -24,18 +23,22 @@ public class App {
 
     private static void processInput() {
         Payment payment;
+        Scanner in = new Scanner(System.in);
+        String line = in.nextLine();
         try {
-            payment = paymentService.readPayment();
-            payments.add(payment);
-            int currentBalance = 0;
-            if (balance.get(payment.getCurrency()) != null) {
-                currentBalance = balance.get(payment.getCurrency());
+            if (line.equals("quit")) {
+                System.exit(0);
             }
-            balance.put(payment.getCurrency(), currentBalance + payment.getValue());
-        } catch (Exception ex) {
-            ex.printStackTrace();
+            payment = paymentService.readPayment(line);
+        } catch (RuntimeException ex) {
             System.out.println("!!! " + ex.getLocalizedMessage());
+            return;
         }
+        int currentBalance = 0;
+        if (balance.get(payment.getCurrency()) != null) {
+            currentBalance = balance.get(payment.getCurrency());
+        }
+        balance.put(payment.getCurrency(), currentBalance + payment.getValue());
     }
 
     private static void scheduleNetAmounts() {

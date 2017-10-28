@@ -4,20 +4,23 @@ import com.phpdaddy.paymenttracker.Constants;
 import com.phpdaddy.paymenttracker.model.Currency;
 import com.phpdaddy.paymenttracker.model.Payment;
 
-import java.util.Scanner;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class PaymentService {
 
-    public Payment readPayment() {
-        Scanner in = new Scanner(System.in);
+    private final ArrayList<Payment> payments = new ArrayList<>();
+
+    public Payment readPayment(String inputString) {
         Pattern p = Pattern.compile(Constants.PAYMENT_FORMAT);
-        Matcher m = p.matcher(in.nextLine());
+        Matcher m = p.matcher(inputString);
         if (!m.find()) {
             throw new RuntimeException("Incorrect input string");
         }
-        return paymentFromStrings(m.group(1), m.group(2));
+        Payment payment = paymentFromStrings(m.group(1), m.group(2));
+        payments.add(payment);
+        return payment;
     }
 
     private static Payment paymentFromStrings(String _currency, String _value) {
