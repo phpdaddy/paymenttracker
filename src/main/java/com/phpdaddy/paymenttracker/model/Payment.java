@@ -4,6 +4,11 @@ public class Payment {
     private Currency currency;
     private Integer value;
 
+    public Payment(Currency currency, Integer value) {
+        this.currency = currency;
+        this.value = value;
+    }
+
     public Currency getCurrency() {
         return currency;
     }
