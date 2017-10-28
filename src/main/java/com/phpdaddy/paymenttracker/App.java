@@ -56,7 +56,6 @@ public class App {
         }
     }
 
-
     private static void readPayments(String line) {
         Payment payment;
         try {
