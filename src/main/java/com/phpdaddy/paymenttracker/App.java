@@ -16,7 +16,7 @@ public class App {
     public static void main(String[] args) {
         scheduleNetAmounts();
         while (true) {
-            System.out.println("Enter payment in format 'USD 123'");
+            System.out.println("Enter payment in format 'USD 123' or 'quit' for exit");
             processInput();
         }
     }
