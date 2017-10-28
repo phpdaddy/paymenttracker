@@ -21,6 +21,8 @@ Run tests with IDEA tools
 * If the input line has incorrect format the error message is displayed 
 * If currency does not exist then there will be an error
 * Only integer values are applicable for payments
+* Java 8 is used
+
 ## Authors
 
 * **Maksym Prysiazhnyi** - *Initial work*
